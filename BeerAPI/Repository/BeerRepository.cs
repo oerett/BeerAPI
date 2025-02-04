@@ -8,7 +8,7 @@ namespace BeerAPI.Repository
     public class BeerRepository : IBeerRepository
     {
         private List<Beer> _beers;
-        //TODO shiko menyra se si ta besh shtimin ne memorie
+
         public BeerRepository()
         {
             _beers = new List<Beer>()
@@ -26,6 +26,20 @@ namespace BeerAPI.Repository
                     Name = "Heineken",
                     Rating = 3,
                     Type = "Pale ale"
+                },
+                new Beer
+                {
+                    ID = 3,
+                    Name = "Guinness",
+                    Rating = 5,
+                    Type = "Stout"
+                },
+                new Beer
+                {
+                    ID = 4,
+                    Name = "Budweiser",
+                    Rating = 3,
+                    Type = "Lager"
                 }
             };
         }
@@ -42,6 +56,7 @@ namespace BeerAPI.Repository
 
         public Beer AddBeer(Beer beer)
         {
+            beer.ID = _beers.Any() ? _beers.Max(b => b.ID) + 1 : 1;
             _beers.Add(beer);
             return beer;
         }
@@ -62,5 +77,6 @@ namespace BeerAPI.Repository
 
             return beer;
         }
+
     }
 }
